@@ -1,6 +1,10 @@
 class Hamming
 
   def self.compute(seq1, seq2)
+    if !(seq1.length == seq2.length)
+      raise ArgumentError
+    end
+
     hamming_number = 0
     counter = 0
 

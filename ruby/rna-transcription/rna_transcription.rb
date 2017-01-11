@@ -7,15 +7,15 @@ class Complement
 
     dna_string.each_char {|nucleotide|
       
-      case nucleotide        
+      rna_string << case
       when nucleotide == "G"
-        rna_string << "C"
+        "C"
       when nucleotide == "C"
-        rna_string << "G"
+        "G"
       when nucleotide == "T"
-        rna_string << "A"
+        "A"
       when nucleotide == "A"
-        rna_string << "U"
+        "U"
       else
         return ""
       end

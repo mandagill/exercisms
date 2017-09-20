@@ -7,19 +7,16 @@ require_relative 'pangram'
 # Test data version: # 2adfe21
 class PangramTest < Minitest::Test
   def test_sentence_empty
-    # skip
     phrase = ''
     refute Pangram.pangram?(phrase), "#{phrase.inspect} is NOT a pangram"
   end
 
   def test_pangram_with_only_lower_case
-    skip
     phrase = 'the quick brown fox jumps over the lazy dog'
     assert Pangram.pangram?(phrase), "#{phrase.inspect} IS a pangram"
   end
 
   def test_missing_character_x
-    skip
     phrase = 'a quick movement of the enemy will jeopardize five gunboats'
     refute Pangram.pangram?(phrase), "#{phrase.inspect} is NOT a pangram"
   end

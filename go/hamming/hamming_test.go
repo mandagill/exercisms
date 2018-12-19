@@ -22,7 +22,7 @@ func TestHamming(t *testing.T) {
 
 			// we do not expect error
 			if err != nil {
-				t.Fatalf("When testing %q, Distance(%q, %q) returned error: %v when expecting none.",
+				t.Fatalf("When testing %q, Distance(%q, %q) returned error: %v when expecting no errors.",
 					tc.desc, tc.s1, tc.s2, err)
 			}
 		}

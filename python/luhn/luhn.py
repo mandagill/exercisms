@@ -1,6 +1,3 @@
-from collections import deque
-
-
 class Luhn(object):
     def __init__(self, card_num):
         self.card_num = card_num
@@ -11,25 +8,26 @@ class Luhn(object):
         try:
             ccn = self.card_num
             ccn = ccn.replace(" ", "")
-            ccn = deque(ccn[:-1])
-            ccn_list_of_ints = [int(d) for d in ccn]
-            products = []
+            slicable_ccn = list(ccn)
+            static_ints = [int(d) for d in slicable_ccn[::-2]]
+            slicable_ccn.pop()
+            luhn_ints = [int(d) for d in slicable_ccn[::-2]]
 
-            for n in ccn_list_of_ints[::-2]:
+            # starting at -1 so I can increment at the beginning
+            counter = -1
+
+            for n in luhn_ints:
+                counter += 1
                 squared = int(n)*2
                 if squared > 9:
-                    char = str(squared)
-                    digits = [int(char) for char in str(n*2)]
-                    print("this is digits and the type of its contents:",
-                          digits, type(digits[0]))
-                    products.append(sum(digits))
-                    continue
+                    x = squared - 9
+                    luhn_ints[counter] = x
                 else:
-                    products.append(squared)
+                    luhn_ints[counter] = squared
 
-            print("this is list of products", products)
-            return sum(products) % 10 == 0
+            total = sum(luhn_ints) + sum(static_ints)
+            return(total % 10 == 0)
 
         except:
             raise Exception(
-                "Please submit a string of numbers and spaces only")
+                "🎶 something's broken something's broken 🎶")

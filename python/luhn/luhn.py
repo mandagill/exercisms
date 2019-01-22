@@ -3,16 +3,10 @@ class Luhn(object):
         self.card_num = card_num
 
     def is_valid(self):
-        if len(self.card_num) <= 1:
+        if len(self.card_num.strip()) <= 1:
             return False
         try:
-            ccn = self.card_num
-            ccn = ccn.replace(" ", "")
-            slicable_ccn = list(ccn)
-            static_ints = [int(d) for d in slicable_ccn[::-2]]
-            slicable_ccn.pop()
-            luhn_ints = [int(d) for d in slicable_ccn[::-2]]
-
+            static_ints, luhn_ints = self.format_number()
             # starting at -1 so I can increment at the beginning
             counter = -1
 
@@ -29,5 +23,19 @@ class Luhn(object):
             return(total % 10 == 0)
 
         except:
-            raise Exception(
-                "🎶 something's broken something's broken 🎶")
+            return False 
+
+    def format_number(self):
+        """Takes a string and outputs an array that can 
+        have the Luhn algorithm applied to it"""
+        try:    
+            ccn = self.card_num.replace(" ", "")
+            slicable_ccn = list(ccn)
+            static = [int(d) for d in slicable_ccn[::-2]]
+            slicable_ccn.pop()
+            luhn = [int(d) for d in slicable_ccn[::-2]]
+
+            return static, luhn
+        except:
+            return False
+

@@ -2,3 +2,5 @@
 __pycache__/
 .gitignore
 .vscode
+.DS_Store
+python/.DS_Store

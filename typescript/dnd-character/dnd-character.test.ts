@@ -78,10 +78,9 @@ describe("Character creation", () => {
   it("Random character is valid", () => {
     const character = new DnDCharacter();
 
-    // TODO make me pass!
-    // expect(character.hitpoints).toEqual(
-    //   10 + DnDCharacter.getModifierFor(character.constitution)
-    // );
+    expect(character.hitpoints).toEqual(
+      10 + DnDCharacter.getModifierFor(character.constitution)
+    );
 
     expect(character.strength).toBeGreaterThanOrEqual(3);
     expect(character.strength).toBeLessThanOrEqual(18);

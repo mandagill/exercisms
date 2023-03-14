@@ -4,41 +4,23 @@ export function toRna(Dna: string) {
   }
 
   let rnaString = "";
-  for (let i = 0; i < Dna.length; i++) {
-    if (Dna[i] === "G") {
+
+  [...Dna].forEach((letter) => {
+    if (letter === "G") {
       rnaString = rnaString.concat("C");
-    } else if (Dna[i] === "C") {
+    } else if (letter === "C") {
       rnaString = rnaString.concat("G");
-    } else if (Dna[i] === "T") {
+    } else if (letter === "T") {
       rnaString = rnaString.concat("A");
-    } else if (Dna[i] === "A") {
+    } else if (letter === "A") {
       rnaString = rnaString.concat("U");
     }
-  }
-  console.log(`this is what is returned: ${rnaString}`);
+  });
+
   return rnaString;
 }
 
-function isValidInput(input: string): Boolean {
-  const regex1 = new RegExp(/[B]/g);
-  const regex2 = new RegExp(/[D-F]/g);
-  const regex3 = new RegExp(/[H-S]/g);
-  const regex4 = new RegExp(/[U-Z]/g);
-  let isValid = true;
-
-  const check1 = regex1.test(input);
-  const check2 = regex2.test(input);
-  const check3 = regex3.test(input);
-  const check4 = regex4.test(input);
-
-  if (
-    check1 === true ||
-    check2 === true ||
-    check3 === true ||
-    check4 === true
-  ) {
-    isValid = false;
-  }
-
-  return isValid;
+function isValidInput(input: string): boolean {
+  const regex = new RegExp(/[B]|[D-F][H-S]|[U-Z]/g);
+  return !regex.test(input);
 }

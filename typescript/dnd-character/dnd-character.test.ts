@@ -101,7 +101,7 @@ describe("Character creation", () => {
     expect(character.charisma).toBeLessThanOrEqual(18);
   });
 
-  xit("Each ability is only calculated once", () => {
+  it("Each ability is only calculated once", () => {
     const character = new DnDCharacter();
 
     expect(character.strength === character.strength).toBeTruthy();

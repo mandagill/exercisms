@@ -8,21 +8,19 @@ export class DnDCharacter {
   hitpoints: number;
 
   constructor() {
-    const startingConstitution = DnDCharacter.generateAbilityScore();
-
     this.strength = DnDCharacter.generateAbilityScore();
     this.dexterity = DnDCharacter.generateAbilityScore();
-    this.constitution = startingConstitution;
+    this.constitution = DnDCharacter.generateAbilityScore();
     this.intelligence = DnDCharacter.generateAbilityScore();
     this.wisdom = DnDCharacter.generateAbilityScore();
     this.charisma = DnDCharacter.generateAbilityScore();
-    this.hitpoints = startingConstitution;
+    this.hitpoints = DnDCharacter.getModifierFor(this.constitution) + 10;
   }
 
   public static generateAbilityScore(): number {
     let diceRolls = [];
     for (let rollNumber = 0; rollNumber < 4; rollNumber++) {
-      diceRolls.push(Math.floor(Math.random() * 6));
+      diceRolls.push(this.rollD6());
     }
 
     diceRolls.sort();
@@ -33,6 +31,11 @@ export class DnDCharacter {
 
   // how to make a default value? Like is there a difference between instance methods and class methods?
   public static getModifierFor(abilityValue: number): number {
+    // todo
     return Math.floor((abilityValue - 10) / 2);
+  }
+
+  static rollD6() {
+    return Math.floor(Math.random() * 6 + 1);
   }
 }

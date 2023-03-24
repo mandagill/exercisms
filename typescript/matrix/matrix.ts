@@ -36,6 +36,7 @@ export class Matrix {
     dimension: "rows" | "columns"
   ): Array<Array<number>> {
     let returnMatrix: Array<Array<number>> = [];
+
     if (dimension === "rows") {
       [...data].forEach((arrayOfStrings) => {
         let numberArray: Array<number> = [];
@@ -45,8 +46,25 @@ export class Matrix {
         returnMatrix.push(numberArray);
       });
     } else if (dimension === "columns") {
-      // TODO
-      console.log("y'all want columns");
+      // first, check what the longest row is
+      let longestArrayLength: number = 0;
+      [...data].forEach((arrayOfStrings) => {
+        console.log(`here is each arrayOfStrings: ${arrayOfStrings}`);
+        if (arrayOfStrings.length >= longestArrayLength) {
+          console.log(
+            `here is the current longest array length: ${longestArrayLength}`
+          );
+          longestArrayLength = arrayOfStrings.length;
+        }
+      });
+      // next, iterate over *each column using that index*
+      for (let index = 0; index < longestArrayLength; index++) {
+        let arrayOfColumnValues: Array<number> = [];
+        [...data].forEach((columnsOfStrings) => {
+          arrayOfColumnValues.push(Number(columnsOfStrings[index]));
+        });
+        returnMatrix.push(arrayOfColumnValues);
+      }
     }
     return returnMatrix;
   }
